@@ -2,5 +2,5 @@
 
 ### How to Generate
 ```
-protoc --pproto_path=. --go_out=./gen --go-grpc_out=./gen ./*.proto
+protoc --proto_path=. --go_out=./gen --go-grpc_out=./gen ./*.proto
 ```
