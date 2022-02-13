@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+option go_package = "go/protobuf";
+
+service GrpcService {
+    rpc FindEmployee(FindEmployeeRequest) returns (FindEmployeeResponse);
+    rpc ListEmployee(google.protobuf.Empty) returns (ListEmployeeResponse);
+}
+
+message FindEmployeeRequest {
+    int32 ID = 1;
+}
+
+message FindEmployeeResponse {
+    Employee enployee = 1;
+}
+
+message ListEmployeeResponse {
+    repeated Employee Employees = 1;
+}
+
+enum StatusType {
+    PART_TIME = 0;
+    STAFF = 1;
+    MANAGER = 2;
+}
+
+message Employee {
+    int32 ID = 1;
+    string name = 2;
+    StatusType status = 3;
+}
