@@ -13,7 +13,7 @@ message FindEmployeeRequest {
 }
 
 message FindEmployeeResponse {
-    Employee enployee = 1;
+    Employee employee = 1;
 }
 
 message ListEmployeeResponse {
@@ -30,4 +30,5 @@ message Employee {
     int32 ID = 1;
     string name = 2;
     StatusType status = 3;
+    string location = 4;
 }
