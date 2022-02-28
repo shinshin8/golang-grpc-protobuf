@@ -1,11 +1,10 @@
 syntax = "proto3";
 
-import "google/protobuf/empty.proto";
 option go_package = "go/protobuf";
 
 service GrpcService {
     rpc FindEmployee(FindEmployeeRequest) returns (FindEmployeeResponse);
-    rpc ListEmployee(google.protobuf.Empty) returns (ListEmployeeResponse);
+    rpc ListEmployee(ListEmployeeRequest) returns (ListEmployeeResponse);
 }
 
 message FindEmployeeRequest {
@@ -15,6 +14,8 @@ message FindEmployeeRequest {
 message FindEmployeeResponse {
     Employee employee = 1;
 }
+
+message ListEmployeeRequest {}
 
 message ListEmployeeResponse {
     repeated Employee Employees = 1;

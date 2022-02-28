@@ -7,7 +7,6 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -20,7 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GrpcServiceClient interface {
 	FindEmployee(ctx context.Context, in *FindEmployeeRequest, opts ...grpc.CallOption) (*FindEmployeeResponse, error)
-	ListEmployee(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListEmployeeResponse, error)
+	ListEmployee(ctx context.Context, in *ListEmployeeRequest, opts ...grpc.CallOption) (*ListEmployeeResponse, error)
 }
 
 type grpcServiceClient struct {
@@ -40,7 +39,7 @@ func (c *grpcServiceClient) FindEmployee(ctx context.Context, in *FindEmployeeRe
 	return out, nil
 }
 
-func (c *grpcServiceClient) ListEmployee(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListEmployeeResponse, error) {
+func (c *grpcServiceClient) ListEmployee(ctx context.Context, in *ListEmployeeRequest, opts ...grpc.CallOption) (*ListEmployeeResponse, error) {
 	out := new(ListEmployeeResponse)
 	err := c.cc.Invoke(ctx, "/GrpcService/ListEmployee", in, out, opts...)
 	if err != nil {
@@ -54,7 +53,7 @@ func (c *grpcServiceClient) ListEmployee(ctx context.Context, in *emptypb.Empty,
 // for forward compatibility
 type GrpcServiceServer interface {
 	FindEmployee(context.Context, *FindEmployeeRequest) (*FindEmployeeResponse, error)
-	ListEmployee(context.Context, *emptypb.Empty) (*ListEmployeeResponse, error)
+	ListEmployee(context.Context, *ListEmployeeRequest) (*ListEmployeeResponse, error)
 	mustEmbedUnimplementedGrpcServiceServer()
 }
 
@@ -65,7 +64,7 @@ type UnimplementedGrpcServiceServer struct {
 func (UnimplementedGrpcServiceServer) FindEmployee(context.Context, *FindEmployeeRequest) (*FindEmployeeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindEmployee not implemented")
 }
-func (UnimplementedGrpcServiceServer) ListEmployee(context.Context, *emptypb.Empty) (*ListEmployeeResponse, error) {
+func (UnimplementedGrpcServiceServer) ListEmployee(context.Context, *ListEmployeeRequest) (*ListEmployeeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListEmployee not implemented")
 }
 func (UnimplementedGrpcServiceServer) mustEmbedUnimplementedGrpcServiceServer() {}
@@ -100,7 +99,7 @@ func _GrpcService_FindEmployee_Handler(srv interface{}, ctx context.Context, dec
 }
 
 func _GrpcService_ListEmployee_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(ListEmployeeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -112,7 +111,7 @@ func _GrpcService_ListEmployee_Handler(srv interface{}, ctx context.Context, dec
 		FullMethod: "/GrpcService/ListEmployee",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GrpcServiceServer).ListEmployee(ctx, req.(*emptypb.Empty))
+		return srv.(GrpcServiceServer).ListEmployee(ctx, req.(*ListEmployeeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
